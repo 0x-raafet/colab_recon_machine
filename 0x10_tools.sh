@@ -29,6 +29,8 @@ SUBDOMAINS_ENUMERATION () {
     cd /root/OK-VPS/tools/file && wget https://go.dev/dl/go1.20.5.linux-amd64.tar.gz && tar -zxvf go1.20.5.linux-amd64.tar.gz -C /usr/local/ && mkdir ~/.go && GOROOT=/usr/local/go && GOPATH=~/.go && PATH=$PATH:$GOROOT/bin:$GOPATH/bin && update-alternatives --install "/usr/bin/go" "go" "/usr/local/go/bin/go" 0 && update-alternatives --set go /usr/local/go/bin/go;
     echo -e ${BLUE}"[SUBDOMAINS ENUMERATION]" ${RED}"Recon-ng installation in progress ...";
     git clone https://github.com/lanmaster53/recon-ng.git && cd recon-ng && pip install -r REQUIREMENTS
+    echo -e ${BLUE}"[SUBDOMAINS ENUMERATION]" ${RED}"Subfinder installation in progress ...";
+    go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 }
 HTTP_PROBE () {
     #httpx
@@ -86,11 +88,9 @@ VULNS_SQLI () {
 }
 VULNS_SCANNER () {
     #Jaeles
-    echo -e ${BLUE}"[VULNERABILITY SCANNER]" ${RED}"Jaeles installation in progress ...";
-    cd /root/OK-VPS/tools/file && wget https://github.com/jaeles-project/jaeles/releases/download/beta-v0.17/jaeles-v0.17-linux.zip > /dev/null 2>&1 && unzip jaeles-v0.17-linux.zip > /dev/null 2>&1 && mv jaeles /usr/local/bin/;
-    cd /root/templates && git clone https://github.com/jaeles-project/jaeles-signatures.git > /dev/null 2>&1;
-    cd /root/templates && git clone https://github.com/ghsec/ghsec-jaeles-signatures > /dev/null 2>&1;
-    echo -e ${BLUE}"[VULNERABILITY SCANNER]" ${GREEN}"Jaeles installation is done !"; echo "";
+    echo -e ${BLUE}"[VULNERABILITY SCANNER]" ${RED}"Sqlmap installation in progress ...";
+    apt install sqlmap
+    echo -e ${BLUE}"[VULNERABILITY SCANNER]" ${GREEN}"Sqlmap installation is done !"; echo "";
 
 }
 USEFUL_TOOLS () {
