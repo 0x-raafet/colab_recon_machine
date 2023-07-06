@@ -29,9 +29,8 @@ install_subdomain_tools() {
     # Install Golang
     echo -e "[SUBDOMAINS ENUMERATION] Golang installation in progress ..."
     wget https://go.dev/dl/go1.20.5.linux-amd64.tar.gz
-    tar -zxvf go1.20.5.linux-amd64.tar.gz -C /usr/local/
-    rm go1.20.5.linux-amd64.tar.gz
-
+    rm -rf /usr/local/go && tar -C /usr/local -xzf go1.20.5.linux-amd64.tar.gz
+    
     # Install Recon-ng
     echo -e "[SUBDOMAINS ENUMERATION] Recon-ng installation in progress ..."
     git clone https://github.com/lanmaster53/recon-ng.git
@@ -174,9 +173,4 @@ install_security_lists
 
 echo -e "Copying tools into /usr/bin ..."
 cp ~/go/bin/* /usr/bin/
-echo -e "Setup ngrok SSH tunnel ..."
-wget https://raw.githubusercontent.com/a2nk/get-xmr/main/ssh-ngrokok.sh
-chmod +x ssh-ngrokok.sh
-./ssh-ngrokok.sh
-
 echo -e "Done."
