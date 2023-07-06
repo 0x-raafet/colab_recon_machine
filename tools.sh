@@ -73,7 +73,7 @@ install_web_crawling_tools() {
     echo -e "[WEB CRAWLING] ParamSpider installation is done!"
 
     # Install Waybackurls
-    echo -e "${BLUE[WEB CRAWLING] Waybackurls installation in progress ..."
+    echo -e "[WEB CRAWLING] Waybackurls installation in progress ..."
     go install github.com/tomnomnom/waybackurls@latest
     echo -e "[WEB CRAWLING] Waybackurls installation is done!"
 }
