@@ -1,6 +1,5 @@
 #!/bin/bash -i
 
-#Creating tools directory if not exist
 clear;
 
 ENVIRONMENT () {
