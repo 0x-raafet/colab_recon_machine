@@ -1,6 +1,8 @@
+### Recon tools installion
+
 ## Install
  ```shell
-   git clone https://github.com/0x-raafet/recon-tools.git && cd recon-tools/ && chmod +x tools.sh && ./tools.sh
+   wget https://raw.githubusercontent.com/0x-raafet/recon-tools/main/tools.sh && chmod +x tools.sh && ./tools.sh
  ```
 ## Subdomain Enumeration
 
