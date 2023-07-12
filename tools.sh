@@ -7,14 +7,15 @@ install_packages() {
     echo -e "[ENVIRONMENT] Packages required installation in progress ..."
 
     # Update and upgrade packages
-    apt-get update -y
-    apt-get upgrade -y
+    apt update -y
+    apt upgrade -y
 
     # Install Python and Pip
-    apt-get install python python2 python3 python-pip python3-pip -y
+    apt install python3 -y
+    apt install python3-pip -y
 
     # Install additional packages
-    apt-get install unzip curl snap jq -y
+    apt install unzip curl snap jq -y
 
     # Install Python packages
     pip3 install colored jsbeautifier lxml
@@ -38,7 +39,7 @@ install_subdomain_tools() {
     git clone https://github.com/lanmaster53/recon-ng.git
     cd recon-ng
     pip install -r REQUIREMENTS
-
+    cd
     # Install Subfinder
     echo -e "[SUBDOMAINS ENUMERATION] Subfinder installation in progress ..."
     go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
@@ -71,6 +72,7 @@ install_web_crawling_tools() {
     git clone https://github.com/devanshbatham/ParamSpider
     cd ParamSpider
     pip3 install -r requirements.txt
+    cd
     echo -e "[WEB CRAWLING] ParamSpider installation is done!"
 
     # Install Waybackurls
