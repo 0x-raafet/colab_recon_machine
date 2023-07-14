@@ -1,5 +1,4 @@
 #!/bin/bash -i
-# Clear the terminal
 clear
 
 # Function: Install required packages
@@ -7,18 +6,20 @@ install_packages() {
     echo -e "[ENVIRONMENT] Packages required installation in progress ..."
 
     # Update and upgrade packages
-    apt update -y
-    apt upgrade -y
+    apt update -y > /dev/null
+    apt upgrade -y > /dev/null
 
     # Install Python and Pip
-    apt install python3 -y
-    apt install python3-pip -y
+    apt install python3 -y > /dev/null
+    apt install python3-pip -y > /dev/null
 
     # Install additional packages
-    apt install unzip curl snap jq -y
+    apt install unzip -y > /dev/null
+    apt install curl -y > /dev/null
+    apt install jq -y > /dev/null
 
     # Install Python packages
-    pip3 install colored jsbeautifier lxml
+    pip3 install colored jsbeautifier lxml > /dev/null
 
     echo -e "[ENVIRONMENT] Package installation is done!"
 }
@@ -36,16 +37,41 @@ install_subdomain_tools() {
     
     # Install Recon-ng
     echo -e "[SUBDOMAINS ENUMERATION] Recon-ng installation in progress ..."
-    git clone https://github.com/lanmaster53/recon-ng.git
+    git clone https://github.com/lanmaster53/recon-ng.git > /dev/null
     cd recon-ng
-    pip install -r REQUIREMENTS
+    pip install -r REQUIREMENTS > /dev/null
     cd
     # Install Subfinder
     echo -e "[SUBDOMAINS ENUMERATION] Subfinder installation in progress ..."
-    go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
-
+    go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest > /dev/null
+    echo -e "[SUBDOMAINS ENUMERATION] Amass installation in progress ..."
+    go install -v github.com/owasp-amass/amass/v3/...@master
+    echo -e "[SUBDOMAINS ENUMERATION] AssetFinder installation in progress ..."
+    go install github.com/tomnomnom/assetfinder@latest > /dev/null 
+    echo -e "[SUBDOMAINS ENUMERATION] Lilly installation in progress ..."
+    git clone https://github.com/Dheerajmadhukar/Lilly.git  > /dev/null  && cd Lilly && chmod +x lilly.sh && mv lilly /usr/bin && cd ;
+    rm -rf Lilly/
+    echo -e "[SUBDOMAINS ENUMERATION] Crobat installation in progress ..."
+    go install github.com/cgboal/sonarsearch/cmd/crobat@latest > /dev/null
+    echo -e "[SUBDOMAINS ENUMERATION] Sudomy installation in progress ..."
+    git clone --recursive https://github.com/screetsec/Sudomy.git > /dev/null 2>&1 && cd Sudomy && python3 -m pip install -r requirements.txt && apt-get install npm && apt-get install jq && npm install -g phantomjs && apt-get install jq nmap phantomjs npm chromium parallel -y && npm i -g wappalyzer wscat && cp sudomy /usr/bin && cp sudomy.api /usr/bin && cp slack.conf /usr/bin && cp sudomy.conf /usr/bin > /dev/null 2>&1 && ln -s Sudomy/sudomy /usr/bin/ && cd ;
+    echo -e "[SUBDOMAINS ENUMERATION] Mapsidr installation in progress ..."
+    go install -v github.com/projectdiscovery/mapcidr/cmd/mapcidr@latest > /dev/null
+    echo -e "[SUBDOMAINS ENUMERATION] CertCrunchy installation in progress ..."
+    git clone https://github.com/joda32/CertCrunchy.git > /dev/null
+    cd CertCrunchy
+    pip3 install -r requirements.txt > /dev/null && cd
+    echo "alias certcrunchy=python3 /root/CertCrunchy/certcrunchy.py" >> ~/.bashrc
+    echo -e "[SUBDOMAINS ENUMERATION] github-subdomains installation in progress ..."
+    go install github.com/gwen001/github-subdomains@latest > /dev/null
+    echo -e "[SUBDOMAINS ENUMERATION] Gotator installation in progress ..."
+    go install github.com/Josue87/gotator@latest > /dev/null
+    echo -e "[SUBDOMAINS ENUMERATION] dnsx (dns resolver) installation in progress ..."
+    go install -v github.com/projectdiscovery/dnsx/cmd/dnsx@latest > /dev/null
     echo -e "[SUBDOMAINS ENUMERATION] Tools installation is done!"
+    
 }
+
 
 # Function: Install HTTP probing tools
 install_http_probe_tools() {
@@ -53,13 +79,12 @@ install_http_probe_tools() {
 
     # Install httpx
     echo -e "[HTTP PROBE] httpx installation in progress ..."
-    GO111MODULE=on go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
-    ln -s ~/go/bin/httpx /usr/local/bin/
+    GO111MODULE=on go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest > /dev/null
     echo -e "[HTTP PROBE] httpx installation is done!"
 
     # Install httprobe
     echo -e "[HTTP PROBE] httprobe installation in progress ..."
-    go install github.com/tomnomnom/httprobe@latest
+    go install github.com/tomnomnom/httprobe@latest > /dev/null
     echo -e "[HTTP PROBE] httprobe installation is done!"
 }
 
@@ -69,15 +94,15 @@ install_web_crawling_tools() {
 
     # Install ParamSpider
     echo -e "[WEB CRAWLING] ParamSpider installation in progress ..."
-    git clone https://github.com/devanshbatham/ParamSpider
+    git clone https://github.com/devanshbatham/ParamSpider > /dev/null
     cd ParamSpider
-    pip3 install -r requirements.txt
+    pip3 install -r requirements.txt > /dev/null
     cd
     echo -e "[WEB CRAWLING] ParamSpider installation is done!"
 
     # Install Waybackurls
     echo -e "[WEB CRAWLING] Waybackurls installation in progress ..."
-    go install github.com/tomnomnom/waybackurls@latest
+    go install github.com/tomnomnom/waybackurls@latest > /dev/null
     echo -e "[WEB CRAWLING] Waybackurls installation is done!"
 }
 
@@ -97,13 +122,13 @@ install_fuzzing_tools() {
 
     # Install ffuf
     echo -e "[FUZZING TOOLS] ffuf installation in progress ..."
-    go install github.com/ffuf/ffuf@latest
+    go install github.com/ffuf/ffuf@latest > /dev/null 
     echo -e "[FUZZING TOOLS] ffuf installation is done!"
 }
 # Function: Install seclists
 install_security_lists() {
     echo -e "[VULNERABILITY SCANNER] Seclists installation in progress ..."
-    git clone https://github.com/danielmiessler/SecLists.git
+    git clone https://github.com/danielmiessler/SecLists.git > /dev/null
     echo -e "[VULNERABILITY SCANNER] Seclists installation is done!"
 }
 
@@ -115,15 +140,16 @@ install_api_tools() {
     echo -e "[API TOOLS] Kiterunner installation in progress ..."
     wget https://github.com/assetnote/kiterunner/releases/download/v"$KITERUNNERVER"/kiterunner_"$KITERUNNERVER"_linux_amd64.tar.gz
     tar xvf kiterunner_"$KITERUNNERVER"_linux_amd64.tar.gz
-    mv kr /usr/local/bin
-    mkdir /root/SecLists/kiterunner-wordlists
-    cd /root/SecLists/kiterunner-wordlists/
+    mv kr /usr/bin
+    mkdir /root/kiterunner-wordlists
+    cd /root/kiterunner-wordlists/
     wget https://wordlists-cdn.assetnote.io/data/kiterunner/routes-large.kite.tar.gz
     wget https://wordlists-cdn.assetnote.io/data/kiterunner/routes-small.kite.tar.gz
     for f in *.tar.gz; do
         tar xf "$f"
         rm -Rf "$f"
     done
+    cd
     echo -e "[API TOOLS] Kiterunner installation is done!"
 }
 
@@ -133,7 +159,7 @@ install_xss_vuln_tools() {
 
     # Install Dalfox
     echo -e "[VULNERABILITY - XSS] Dalfox installation in progress ..."
-    GO111MODULE=on go install -v github.com/hahwul/dalfox/v2@latest
+    GO111MODULE=on go install -v github.com/hahwul/dalfox/v2@latest > /dev/null
     echo -e "[VULNERABILITY - XSS] Dalfox installation is done!"
 }
 
@@ -143,7 +169,7 @@ install_sqli_vuln_tools() {
 
     # Install SQLmap
     echo -e "[VULNERABILITY - SQL Injection] SQLMap installation in progress ..."
-    apt-get install sqlmap -y
+    apt-get install sqlmap -y > /dev/null
     echo -e "[VULNERABILITY - SQL Injection] SQLMap installation is done!"
 }
 
@@ -153,12 +179,12 @@ install_useful_tools() {
 
     # Install anew
     echo -e "[USEFUL TOOLS] anew installation in progress ..."
-    go install github.com/tomnomnom/anew@latest
+    go install github.com/tomnomnom/anew@latest > /dev/null
     echo -e "[USEFUL TOOLS] anew installation is done!"
 
     # Install Tmux
     echo -e "[USEFUL TOOLS] Tmux installation in progress ..."
-    apt-get install tmux -y
+    apt-get install tmux -y > /dev/null
     echo -e "[USEFUL TOOLS] Tmux installation is done!"
 }
 
@@ -176,5 +202,6 @@ install_useful_tools
 install_security_lists
 
 echo -e "Copying tools into /usr/bin ..."
+cd
 cp ~/go/bin/* /usr/bin/
 echo -e "Done."
