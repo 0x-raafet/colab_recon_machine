@@ -10,6 +10,16 @@ For subdomain enumeration, this project utilizes the following tools:
 
 - [recon-ng](https://github.com/lanmaster53/recon-ng)
 - [subfinder](https://github.com/projectdiscovery/subfinder)
+- [Amass](https://github.com/owasp-amass/amass)
+- [Assetfinder](https://github.com/tomnomnom/assetfinder)
+- [Lilly](https://github.com/Dheerajmadhukar/Lilly)
+- [Crobat](https://github.com/cgboal/sonarsearch/)
+- [Sudomy](https://github.com/screetsec/Sudomy)
+- [mapsidr](github.com/projectdiscovery/mapcidr/)
+- [CertCrunchy](https://github.com/joda32/CertCrunchy)
+- [GithubSubdomains](github.com/gwen001/github-subdomains)
+- [gotator](github.com/Josue87/gotator)
+- [dnsx](github.com/projectdiscovery/dnsx/)
 
 ## HTTP Probe
 
