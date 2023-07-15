@@ -47,20 +47,16 @@ install_subdomain_tools() {
     echo -e "[SUBDOMAINS ENUMERATION] Amass installation in progress ..."
     go install -v github.com/owasp-amass/amass/v3/...@master
     echo -e "[SUBDOMAINS ENUMERATION] AssetFinder installation in progress ..."
-    go install github.com/tomnomnom/assetfinder@latest > /dev/null 
+    go install github.com/tomnomnom/assetfinder@latest > /dev/null
     echo -e "[SUBDOMAINS ENUMERATION] Lilly installation in progress ..."
     git clone https://github.com/Dheerajmadhukar/Lilly.git  > /dev/null  && cd Lilly && chmod +x lilly.sh && mv lilly /usr/bin && cd ;
-    rm -rf Lilly/
-    echo -e "[SUBDOMAINS ENUMERATION] Crobat installation in progress ..."
-    go install github.com/cgboal/sonarsearch/cmd/crobat@latest > /dev/null
-    echo -e "[SUBDOMAINS ENUMERATION] Sudomy installation in progress ..."
-    git clone --recursive https://github.com/screetsec/Sudomy.git > /dev/null 2>&1 && cd Sudomy && python3 -m pip install -r requirements.txt && apt-get install npm && apt-get install jq && npm install -g phantomjs && apt-get install jq nmap phantomjs npm chromium parallel -y && npm i -g wappalyzer wscat && cp sudomy /usr/bin && cp sudomy.api /usr/bin && cp slack.conf /usr/bin && cp sudomy.conf /usr/bin > /dev/null 2>&1 && ln -s Sudomy/sudomy /usr/bin/ && cd ;
     echo -e "[SUBDOMAINS ENUMERATION] Mapsidr installation in progress ..."
     go install -v github.com/projectdiscovery/mapcidr/cmd/mapcidr@latest > /dev/null
     echo -e "[SUBDOMAINS ENUMERATION] CertCrunchy installation in progress ..."
-    git clone https://github.com/joda32/CertCrunchy.git > /dev/null
+    git clone https://github.com/joda32/certcrunchy.git > /dev/null
     cd CertCrunchy
-    pip3 install -r requirements.txt > /dev/null && cd
+    pip3 install -r requirements.txt > /dev/null
+    cd
     echo "alias certcrunchy=python3 /root/CertCrunchy/certcrunchy.py" >> ~/.bashrc
     echo -e "[SUBDOMAINS ENUMERATION] github-subdomains installation in progress ..."
     go install github.com/gwen001/github-subdomains@latest > /dev/null
