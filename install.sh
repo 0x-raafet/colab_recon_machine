@@ -165,6 +165,7 @@ install_http_probe_tools
 install_web_crawling_tools
 install_http_parameter_tools
 install_fuzzing_tools
+NETWORK_SCANNER
 install_xss_vuln_tools
 install_sqli_vuln_tools
 install_useful_tools
