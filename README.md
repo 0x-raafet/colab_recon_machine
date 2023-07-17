@@ -13,8 +13,8 @@ For subdomain enumeration, this project utilizes the following tools:
 - [Amass](https://github.com/owasp-amass/amass)
 - [Assetfinder](https://github.com/tomnomnom/assetfinder)
 - [Lilly](https://github.com/Dheerajmadhukar/Lilly)
-- [Uncover](github.com/projectdiscovery/uncover)
-- [mapsidr](github.com/projectdiscovery/mapcidr/)
+- [Uncover](https://github.com/projectdiscovery/uncover)
+- [mapsidr](http://github.com/projectdiscovery/mapcidr/)
 
 ## HTTP Probe
 
