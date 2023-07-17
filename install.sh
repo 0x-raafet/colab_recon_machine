@@ -22,14 +22,7 @@ install_packages() {
     # Install Python packages
     pip3 install colored jsbeautifier lxml > /dev/null 2>&1;
     # Install Go
-    wget https://go.dev/dl/go1.20.5.linux-amd64.tar.gz
-    tar -zxvf go1.20.5.linux-amd64.tar.gz -C /usr/local/ 
-    mkdir ~/.go && GOROOT=/usr/local/go
-    GOPATH=~/.go
-    PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-    update-alternatives --install "/usr/bin/go" "go" "/usr/local/go/bin/go" 0
-    update-alternatives --set go /usr/local/go/bin/go;
-
+    wget https://go.dev/dl/go1.20.5.linux-amd64.tar.gz && tar -zxvf go1.20.5.linux-amd64.tar.gz -C /usr/local/ && mkdir ~/.go && GOROOT=/usr/local/go && GOPATH=~/.go && PATH=$PATH:$GOROOT/bin:$GOPATH/bin && update-alternatives --install "/usr/bin/go" "go" "/usr/local/go/bin/go" 0 && update-alternatives --set go /usr/local/go/bin/go;
 
     echo -e "[ENVIRONMENT] Package installation is done!"
 }
@@ -47,7 +40,7 @@ install_subdomain_tools() {
     echo -e "[SUBDOMAINS ENUMERATION] Subfinder installation in progress ..."
     go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest > /dev/null 2>&1;
     echo -e "[SUBDOMAINS ENUMERATION] Amass installation in progress ..."
-    go install -v github.com/owasp-amass/amass/v3/...@master
+    go install -v github.com/owasp-amass/amass/v3/...@master > /dev/null 2>&1;
     echo -e "[SUBDOMAINS ENUMERATION] AssetFinder installation in progress ..."
     go install github.com/tomnomnom/assetfinder@latest > /dev/null 2>&1;
     echo -e "[SUBDOMAINS ENUMERATION] Lilly installation in progress ..."
@@ -132,26 +125,6 @@ install_Seclists() {
     echo -e "[VULNERABILITY SCANNER] Seclists installation is done!";
 }
 
-# Function: Install API tools
-install_api_tools() {
-    echo -e "[API TOOLS] Tools installation in progress ...";
-
-    # Install Kiterunner
-    echo -e "[API TOOLS] Kiterunner installation in progress ...";
-    wget https://github.com/assetnote/kiterunner/releases/download/v"$KITERUNNERVER"/kiterunner_"$KITERUNNERVER"_linux_amd64.tar.gz
-    tar xvf kiterunner_"$KITERUNNERVER"_linux_amd64.tar.gz
-    mv kr /usr/bin
-    mkdir /root/kiterunner-wordlists
-    cd /root/kiterunner-wordlists/
-    wget https://wordlists-cdn.assetnote.io/data/kiterunner/routes-large.kite.tar.gz
-    wget https://wordlists-cdn.assetnote.io/data/kiterunner/routes-small.kite.tar.gz
-    for f in *.tar.gz; do
-        tar xf "$f"
-        rm -Rf "$f"
-    done
-    cd ..
-}
-
 # Function: Install XSS vulnerability tools
 install_xss_vuln_tools() {
     echo -e "[VULNERABILITY - XSS] Tools installation in progress ...";
@@ -192,12 +165,11 @@ install_http_probe_tools
 install_web_crawling_tools
 install_http_parameter_tools
 install_fuzzing_tools
-install_api_tools
 install_xss_vuln_tools
 install_sqli_vuln_tools
 install_useful_tools
 install_Seclists
-
+rm go1.20.5.linux-amd64.tar.gz
 echo -e "Copying tools into /usr/bin ...";
 cd
 cp ~/go/bin/* /usr/bin/ ;
