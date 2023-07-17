@@ -42,11 +42,7 @@ For fuzzing, the project utilizes:
 
 - [ffuf](https://github.com/ffuf/ffuf)
 
-## API Tool
 
-For API-related tasks, the project includes:
-
-- [Kiterunner](https://github.com/assetnote/kiterunner)
 
 ## XSS Scanner
 
