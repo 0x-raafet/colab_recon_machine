@@ -51,7 +51,7 @@ install_subdomain_tools() {
     echo -e "[SUBDOMAINS ENUMERATION] AssetFinder installation in progress ..."
     go install github.com/tomnomnom/assetfinder@latest > /dev/null 2>&1;
     echo -e "[SUBDOMAINS ENUMERATION] Lilly installation in progress ..."
-    git clone https://github.com/Dheerajmadhukar/Lilly.git  > /dev/null 2>&1;  && cd Lilly && chmod +x lilly.sh && mv lilly /usr/bin && cd .. ;
+    git clone https://github.com/Dheerajmadhukar/Lilly.git  > /dev/null 2>&1 && cd Lilly && chmod +x lilly.sh && mv lilly /usr/bin && cd .. ;
     echo -e "[SUBDOMAINS ENUMERATION] Mapsidr installation in progress ..."
     go install -v github.com/projectdiscovery/mapcidr/cmd/mapcidr@latest > /dev/null 2>&1;
     echo -e "[SUBDOMAINS ENUMERATION] uncover installation in progress ..."
