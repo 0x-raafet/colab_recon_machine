@@ -2,7 +2,7 @@
 
 ## Install
  ```shell
-   wget https://raw.githubusercontent.com/0x-raafet/recon-tools/main/tools.sh && chmod +x tools.sh && ./tools.sh
+   wget https://raw.githubusercontent.com/0x-raafet/recon-tools/main/install.sh && chmod +x install.sh && ./install.sh
  ```
 ## Subdomain Enumeration
 
@@ -13,13 +13,8 @@ For subdomain enumeration, this project utilizes the following tools:
 - [Amass](https://github.com/owasp-amass/amass)
 - [Assetfinder](https://github.com/tomnomnom/assetfinder)
 - [Lilly](https://github.com/Dheerajmadhukar/Lilly)
-- [Crobat](https://github.com/cgboal/sonarsearch/)
-- [Sudomy](https://github.com/screetsec/Sudomy)
+- [Uncover](github.com/projectdiscovery/uncover)
 - [mapsidr](github.com/projectdiscovery/mapcidr/)
-- [CertCrunchy](https://github.com/joda32/CertCrunchy)
-- [GithubSubdomains](github.com/gwen001/github-subdomains)
-- [gotator](github.com/Josue87/gotator)
-- [dnsx](github.com/projectdiscovery/dnsx/)
 
 ## HTTP Probe
 
@@ -64,6 +59,10 @@ To scan for cross-site scripting (XSS) vulnerabilities, the project employs:
 For SQL injection scanning, the project uses:
 
 - [sqlmap](https://github.com/sqlmapproject/sqlmap)
+## Network Scan
+- [Nmap]
+- [masscan](https://github.com/robertdavidgraham/masscan)
+- [Naabu](github.com/projectdiscovery/naabu)
 
 ## Word Lists
 
