@@ -81,6 +81,11 @@ install_web_crawling_tools() {
     #GF_P
     echo -e ${BLUE}"[WEB CRAWLING]" ${RED}"GF_P installation in progress ...";
     cd /root && mkdir -p .gf &&  cd /root/tools && git clone https://github.com/tomnomnom/gf && cd /root/tools/gf/examples && cp *.json $HOME/.gf && cd /root/tools && git clone https://github.com/1ndianl33t/Gf-Patterns && cd /root/tools/Gf-Patterns && cp *.json $HOME/.gf; 
+    echo -e ${BLUE}"[WEB CRAWLING]" ${RED}"Gau installation in progress ...";
+    go install github.com/lc/gau/v2/cmd/gau@latest > /dev/null 2>&1 ;
+    echo -e ${BLUE}"[WEB CRAWLING]" ${RED}"LinkFinder installation in progress ...";
+    cd /root/tools && git clone https://github.com/GerbenJavado/LinkFinder.git > /dev/null 2>&1 && cd LinkFinder && python3 setup.py install ;
+    echo 'alias linkfinder="python3 ~/tools/LinkFinder/linkfinder.py"' >> /root/.bashrc
 }
 NETWORK_SCANNER () {
     #naabu
@@ -156,6 +161,7 @@ install_xss_vuln_tools
 install_sqli_vuln_tools
 install_useful_tools
 install_Seclists
+source /root/.bashrc
 rm /root/go1.20.5.linux-amd64.tar.gz
 echo -e "Copying tools into /usr/bin ...";
 cp /root/go/bin/* /usr/bin/ ;
