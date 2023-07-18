@@ -113,6 +113,8 @@ install_fuzzing_tools() {
     echo 'alias dirsearch="python3 ~/tools/dirsearch/dirsearch.py"' >> .bashrc
     echo -e "[FUZZING TOOLS] Meg installation in progress ...";
     go install github.com/tomnomnom/meg@latest > /dev/null 2>&1;
+    echo -e "[FUZZING TOOLS] Feroxbuster installation in progress ...";
+    curl -sL https://raw.githubusercontent.com/epi052/feroxbuster/main/install-nix.sh | bash -s /usr/bin;
 }
 # Function: Install seclists
 install_Seclists() {
