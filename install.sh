@@ -75,7 +75,12 @@ install_web_crawling_tools() {
     # Install Waybackurls
     echo -e "[WEB CRAWLING] Waybackurls installation in progress ...";
     go install github.com/tomnomnom/waybackurls@latest > /dev/null 2>&1;
-
+    # Gf
+    echo -e ${BLUE}"[WEB CRAWLING]" ${RED}"GF installation in progress ...";
+    go install github.com/tomnomnom/gf@latest > /dev/null 2>&1 ;
+    #GF_P
+    echo -e ${BLUE}"[WEB CRAWLING]" ${RED}"GF_P installation in progress ...";
+    cd /root && mkdir -p .gf &&  cd /root/tools && git clone https://github.com/tomnomnom/gf && cd /root/tools/gf/examples && cp *.json $HOME/.gf && cd /root/tools && git clone https://github.com/1ndianl33t/Gf-Patterns && cd /root/tools/Gf-Patterns && cp *.json $HOME/.gf; 
 }
 NETWORK_SCANNER () {
     #naabu
