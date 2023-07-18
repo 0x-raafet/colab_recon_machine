@@ -105,6 +105,7 @@ install_fuzzing_tools() {
     go install github.com/ffuf/ffuf@latest > /dev/null 2>&1; 
     echo -e "[FUZZING TOOLS] dirsearch installation in progress ...";
     cd /root/tools && git clone https://github.com/maurosoria/dirsearch.git --depth 1 > /dev/null 2>&1 && cd dirsearch && pip3 install -r requirements.txt > /dev/null 2>&1 ;
+    echo 'alias dirsearch="python3 ~/tools/dirsearch/dirsearch.py"' >> .bashrc
     echo -e "[FUZZING TOOLS] Meg installation in progress ...";
     go install github.com/tomnomnom/meg@latest > /dev/null 2>&1;
 }
