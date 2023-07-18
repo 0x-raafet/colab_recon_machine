@@ -110,14 +110,12 @@ install_fuzzing_tools() {
 }
 # Function: Install seclists
 install_Seclists() {
-    echo -e "[VULNERABILITY SCANNER] Seclists installation in progress ...";
+    echo -e "[WorldLists] Seclists installation in progress ...";
     cd /root && git clone https://github.com/danielmiessler/SecLists.git > /dev/null 2>&1;
-    echo -e "[VULNERABILITY SCANNER] Seclists installation is done!";
 }
 
 # Function: Install XSS vulnerability tools
 install_xss_vuln_tools() {
-    echo -e "[VULNERABILITY - XSS] Tools installation in progress ...";
 
     # Install Dalfox
     echo -e "[VULNERABILITY - XSS] Dalfox installation in progress ...";
@@ -139,12 +137,10 @@ install_useful_tools() {
     # Install anew
     echo -e "[USEFUL TOOLS] anew installation in progress ...";
     go install github.com/tomnomnom/anew@latest > /dev/null 2>&1;
-    echo -e "[USEFUL TOOLS] anew installation is done!";
 
     # Install Tmux
     echo -e "[USEFUL TOOLS] Tmux installation in progress ...";
     apt-get install tmux -y > /dev/null 2>&1;
-    echo -e "[USEFUL TOOLS] Tmux installation is done!";
 }
 
 # Call the functions to install the tools
