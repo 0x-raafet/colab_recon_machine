@@ -1,6 +1,6 @@
 #!/bin/bash -i
 clear
-
+cd /root && mkdir tools
 # Function: Install required packages
 install_packages() {
     echo -e "[ENVIRONMENT] Packages required installation in progress ..."
@@ -24,75 +24,60 @@ install_packages() {
     # Install Go
     wget https://go.dev/dl/go1.20.5.linux-amd64.tar.gz && tar -zxvf go1.20.5.linux-amd64.tar.gz -C /usr/local/ && mkdir ~/.go && GOROOT=/usr/local/go && GOPATH=~/.go && PATH=$PATH:$GOROOT/bin:$GOPATH/bin && update-alternatives --install "/usr/bin/go" "go" "/usr/local/go/bin/go" 0 && update-alternatives --set go /usr/local/go/bin/go;
 
-    echo -e "[ENVIRONMENT] Package installation is done!"
+    echo -e "[ENVIRONMENT] Package installation is done!";
 }
 
 # Function: Install subdomain enumeration tools
 install_subdomain_tools() {
-    echo -e "[SUBDOMAINS ENUMERATION] Tools installation in progress ..."
-    # Install Recon-ng
-    echo -e "[SUBDOMAINS ENUMERATION] Recon-ng installation in progress ..."
-    git clone https://github.com/lanmaster53/recon-ng.git > /dev/null 2>&1;
-    cd recon-ng
-    pip install -r REQUIREMENTS > /dev/null 2>&1;
-    cd ..
+    echo -e "[SUBDOMAINS ENUMERATION] Tools installation in progress ...";
+
     # Install Subfinder
-    echo -e "[SUBDOMAINS ENUMERATION] Subfinder installation in progress ..."
+    echo -e "[SUBDOMAINS ENUMERATION] Subfinder installation in progress ...";
     go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest > /dev/null 2>&1;
-    echo -e "[SUBDOMAINS ENUMERATION] Amass installation in progress ..."
+    echo -e "[SUBDOMAINS ENUMERATION] Amass installation in progress ...";
     go install -v github.com/owasp-amass/amass/v3/...@master > /dev/null 2>&1;
-    echo -e "[SUBDOMAINS ENUMERATION] AssetFinder installation in progress ..."
+    echo -e "[SUBDOMAINS ENUMERATION] AssetFinder installation in progress ...";
     go install github.com/tomnomnom/assetfinder@latest > /dev/null 2>&1;
-    echo -e "[SUBDOMAINS ENUMERATION] Lilly installation in progress ..."
-    git clone https://github.com/Dheerajmadhukar/Lilly.git  > /dev/null 2>&1 && cd Lilly && chmod +x lilly.sh && mv lilly /usr/bin && cd .. ;
-    echo -e "[SUBDOMAINS ENUMERATION] Mapsidr installation in progress ..."
+    echo -e "[SUBDOMAINS ENUMERATION] Lilly installation in progress ...";
+    cd /root/tools/ && git clone https://github.com/Dheerajmadhukar/Lilly.git  > /dev/null 2>&1 && cd Lilly && chmod +x lilly.sh && mv lilly /usr/bin && cd .. ;
+    echo -e "[SUBDOMAINS ENUMERATION] Mapsidr installation in progress ...";
     go install -v github.com/projectdiscovery/mapcidr/cmd/mapcidr@latest > /dev/null 2>&1;
-    echo -e "[SUBDOMAINS ENUMERATION] uncover installation in progress ..."
+    echo -e "[SUBDOMAINS ENUMERATION] uncover installation in progress ...";
     go install -v github.com/projectdiscovery/uncover/cmd/uncover@latest > /dev/null 2>&1;
-    echo -e "[SUBDOMAINS ENUMERATION] Tools installation is done!"
+    echo -e "[SUBDOMAINS ENUMERATION] Tools installation is done!";
     
 }
 
 
 # Function: Install HTTP probing tools
 install_http_probe_tools() {
-    echo -e "[HTTP PROBE] Tools installation in progress ..."
+    echo -e "[HTTP PROBE] Tools installation in progress ...";
 
     # Install httpx
-    echo -e "[HTTP PROBE] httpx installation in progress ..."
+    echo -e "[HTTP PROBE] httpx installation in progress ...";
     GO111MODULE=on go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest > /dev/null 2>&1;
-    echo -e "[HTTP PROBE] httpx installation is done!"
+    echo -e "[HTTP PROBE] httpx installation is done!";
 
     # Install httprobe
-    echo -e "[HTTP PROBE] httprobe installation in progress ..."
+    echo -e "[HTTP PROBE] httprobe installation in progress ...";
     go install github.com/tomnomnom/httprobe@latest > /dev/null 2>&1;
-    echo -e "[HTTP PROBE] httprobe installation is done!"
+    echo -e "[HTTP PROBE] httprobe installation is done!";
 }
 
 # Function: Install web crawling tools
 install_web_crawling_tools() {
-    echo -e "[WEB CRAWLING] Tools installation in progress ..."
+    echo -e "[WEB CRAWLING] Tools installation in progress ...";
 
-    # Install ParamSpider
-    echo -e "[WEB CRAWLING] ParamSpider installation in progress ..."
-    git clone https://github.com/devanshbatham/ParamSpider > /dev/null 2>&1;
-    cd ParamSpider
-    pip3 install -r requirements.txt > /dev/null 2>&1;
-    cd ..
-    echo -e "[WEB CRAWLING] ParamSpider installation is done!"
+    # Install Katana
+    echo -e "[WEB CRAWLING] katana installation in progress ...";
+    go install github.com/projectdiscovery/katana/cmd/katana@latest > /dev/null 2>&1;
 
     # Install Waybackurls
-    echo -e "[WEB CRAWLING] Waybackurls installation in progress ..."
+    echo -e "[WEB CRAWLING] Waybackurls installation in progress ...";
     go install github.com/tomnomnom/waybackurls@latest > /dev/null 2>&1;
-    echo -e "[WEB CRAWLING] Waybackurls installation is done!"
+
 }
 NETWORK_SCANNER () {
-    #Nmap
-    echo -e ${BLUE}"[NETWORK SCANNER]" ${RED}"Nmap installation in progress ...";
-    apt-get install nmap -y && apt install -y libpcap-dev > /dev/null 2>&1;
-    #masscan
-    echo -e ${BLUE}"[NETWORK SCANNER]" ${RED}"Masscan installation in progress ...";
-    cd /root/OK-VPS/tools && git clone https://github.com/robertdavidgraham/masscan > /dev/null 2>&1 && cd masscan && make > /dev/null 2>&1 && make install > /dev/null 2>&1 && mv bin/masscan /usr/bin/ && cd .. ;
     #naabu
     echo -e ${BLUE}"[NETWORK SCANNER]" ${RED}"Naabu installation in progress ...";
     GO111MODULE=on go install -v github.com/projectdiscovery/naabu/v2/cmd/naabu@latest > /dev/null 2>&1;
@@ -100,8 +85,7 @@ NETWORK_SCANNER () {
 
 # Function: Install HTTP parameter discovery tools
 install_http_parameter_tools() {
-    echo -e "[HTTP PARAMETER DISCOVERY] Tools installation in progress ...";
-
+ 
     # Install Arjun
     echo -e "[HTTP PARAMETER DISCOVERY] Arjun installation in progress ...";
     pip3 install arjun > /dev/null 2>&1;
@@ -115,16 +99,14 @@ install_fuzzing_tools() {
     echo -e "[FUZZING TOOLS] ffuf installation in progress ...";
     go install github.com/ffuf/ffuf@latest > /dev/null 2>&1; 
     echo -e "[FUZZING TOOLS] dirsearch installation in progress ...";
-    git clone https://github.com/maurosoria/dirsearch.git --depth 1 > /dev/null 2>&1;
-    cd dirsearch && pip3 install -r requirements.txt > /dev/null 2>&1 ;
-    cd ..
+    cd /root/tools && git clone https://github.com/maurosoria/dirsearch.git --depth 1 > /dev/null 2>&1 && cd dirsearch && pip3 install -r requirements.txt > /dev/null 2>&1 ;
     echo -e "[FUZZING TOOLS] Meg installation in progress ...";
-    go install github.com/tomnomnom/meg@latest
+    go install github.com/tomnomnom/meg@latest > /dev/null 2>&1;
 }
 # Function: Install seclists
 install_Seclists() {
     echo -e "[VULNERABILITY SCANNER] Seclists installation in progress ...";
-    git clone https://github.com/danielmiessler/SecLists.git > /dev/null 2>&1;
+    cd /root && git clone https://github.com/danielmiessler/SecLists.git > /dev/null 2>&1;
     echo -e "[VULNERABILITY SCANNER] Seclists installation is done!";
 }
 
@@ -139,7 +121,6 @@ install_xss_vuln_tools() {
 
 # Function: Install SQL Injection vulnerability tools
 install_sqli_vuln_tools() {
-    echo -e "[VULNERABILITY - SQL Injection] Tools installation in progress ...";
 
     # Install SQLmap
     echo -e "[VULNERABILITY - SQL Injection] SQLMap installation in progress ...";
@@ -173,7 +154,7 @@ install_xss_vuln_tools
 install_sqli_vuln_tools
 install_useful_tools
 install_Seclists
-rm go1.20.5.linux-amd64.tar.gz
+rm /root/go1.20.5.linux-amd64.tar.gz
 echo -e "Copying tools into /usr/bin ...";
 cd
 cp ~/go/bin/* /usr/bin/ ;
