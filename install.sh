@@ -161,6 +161,5 @@ install_useful_tools
 install_Seclists
 rm /root/go1.20.5.linux-amd64.tar.gz
 echo -e "Copying tools into /usr/bin ...";
-cd
-cp ~/go/bin/* /usr/bin/ ;
+cp /root/go/bin/* /usr/bin/ ;
 echo -e "Done.";
