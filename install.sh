@@ -23,7 +23,7 @@ install_packages() {
     pip3 install colored jsbeautifier lxml > /dev/null 2>&1;
     # Install Go
     wget https://go.dev/dl/go1.20.5.linux-amd64.tar.gz && tar -zxvf go1.20.5.linux-amd64.tar.gz -C /usr/local/ && mkdir ~/.go && GOROOT=/usr/local/go && GOPATH=~/.go && PATH=$PATH:$GOROOT/bin:$GOPATH/bin && update-alternatives --install "/usr/bin/go" "go" "/usr/local/go/bin/go" 0 && update-alternatives --set go /usr/local/go/bin/go;
-
+    clear
     echo -e "[ENVIRONMENT] Package installation is done!";
 }
 
