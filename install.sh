@@ -149,6 +149,10 @@ install_useful_tools() {
     # Install Tmux
     echo -e "[USEFUL TOOLS] Tmux installation in progress ...";
     apt-get install tmux -y > /dev/null 2>&1;
+    
+    # install qsreplace
+    echo -e "[USEFUL TOOLS] qsreplace installation in progress ...";
+    go install github.com/tomnomnom/qsreplace@latest > /dev/null 2>&1;
 }
 
 # Call the functions to install the tools
