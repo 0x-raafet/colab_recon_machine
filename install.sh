@@ -23,6 +23,7 @@ install_packages() {
     pip3 install colored jsbeautifier lxml > /dev/null 2>&1;
     # Install Go
     wget https://go.dev/dl/go1.20.5.linux-amd64.tar.gz && tar -zxvf go1.20.5.linux-amd64.tar.gz -C /usr/local/ && mkdir ~/.go && GOROOT=/usr/local/go && GOPATH=~/.go && PATH=$PATH:$GOROOT/bin:$GOPATH/bin && update-alternatives --install "/usr/bin/go" "go" "/usr/local/go/bin/go" 0 && update-alternatives --set go /usr/local/go/bin/go;
+    rm /root/go1.20.5.linux-amd64.tar.gz
     clear
     echo -e "[ENVIRONMENT] Package installation is done!";
 }
@@ -156,19 +157,100 @@ install_useful_tools() {
 }
 
 # Call the functions to install the tools
-install_packages
-install_subdomain_tools
-install_http_probe_tools
-install_web_crawling_tools
-install_http_parameter_tools
-install_fuzzing_tools
-NETWORK_SCANNER
-install_xss_vuln_tools
-install_sqli_vuln_tools
-install_useful_tools
-install_Seclists
+#install_packages
+#install_subdomain_tools
+#install_http_probe_tools
+#install_web_crawling_tools
+#install_http_parameter_tools
+#install_fuzzing_tools
+#NETWORK_SCANNER
+#install_xss_vuln_tools
+#install_sqli_vuln_tools
+#install_useful_tools
+#install_Seclists
 source /root/.bashrc
-rm /root/go1.20.5.linux-amd64.tar.gz
 echo -e "Copying tools into /usr/bin ...";
 cp /root/go/bin/* /usr/bin/ ;
 echo -e "Done.";
+
+
+
+
+main_menu() {
+    clear
+    echo "Select Tools to install (comma-separated list):"
+    echo "1. subdomain tools"
+    echo "2. HTTP probe tools"
+    echo "3. web crawling tools"
+    echo "4. Param mining tools"
+    echo "5. Fuzzing tools"
+    echo "6. Network scan Tools"
+    echo "7. Xss Vuln tools"
+    echo "8. Sqli vuln tools"
+    echo "9. Useful tools"
+    echo "10. Wordlists"
+    # Add other function options here
+    echo "0. Exit"
+
+    read -p "Enter the numbers of the package you want to install (0 to exit): " choices
+
+    if [[ "$choices" == "0" ]]; then
+        echo "Exiting..."
+        exit 0
+    fi
+    
+    IFS=',' read -ra selected_functions <<< "$choices"
+    # Install required packages
+    install_packages
+    for choice in "${selected_functions[@]}"; do
+        case "$choice" in
+            1)
+                install_subdomain_tools
+                ;;
+            2)
+                install_http_probe_tools
+                ;;
+            3)
+                install_web_crawling_tools
+                ;;
+            4)
+                install_http_parameter_tools
+                ;;
+            5)  
+                install_fuzzing_tools
+                ;;
+            6)  
+                NETWORK_SCANNER
+                ;;
+            7)  
+                install_xss_vuln_tools
+                ;;
+            8)
+                install_sqli_vuln_tools
+                ;;
+            9)
+                install_useful_tools
+                ;;
+            10)
+                install_Seclists
+                ;;
+                
+            # Add other case statements for other functions
+            *)
+                echo "Invalid choice: $choice. Skipping..."
+                ;;
+        esac
+    done
+    source /root/.bashrc
+    echo -e "Copying tools into /usr/bin ...";
+    cp /root/go/bin/* /usr/bin/ ;
+    echo -e "Done.";
+    read -p "Press Enter to continue..."
+    main_menu
+}
+
+# Call the main menu function to start the script
+main_menu
+
+
+
